@@ -10,7 +10,7 @@ namespace SCW.Entities
         public int Id { get; set; }
 
         public int LectuerId { get; set; }
-
+        public virtual Lectuer Lectuer { get; set; }
         public string Description { get; set; }
 
         public int Grade { get; set; }

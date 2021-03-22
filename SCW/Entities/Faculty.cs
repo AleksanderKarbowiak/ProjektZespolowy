@@ -14,5 +14,7 @@ namespace SCW.Entities
         public string Description { get; set; }
 
         public virtual List<FieldOfStudy> Fileds { get; set; }
+
+        public virtual List<Lectuer> Lectuers { get; set; }
     }
 }

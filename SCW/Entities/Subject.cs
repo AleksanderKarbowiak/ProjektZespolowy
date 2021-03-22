@@ -13,13 +13,12 @@ namespace SCW.Entities
 
         public int FieldOfStudyId { get; set; }
 
-        public int LectuerId { get; set; }
+       public virtual FieldOfStudy FieldOfStudy { get; set; }
 
-        public virtual List<Lectuer> Lectuers { get; set; } // jednak lista
+        public virtual List<Lectuer> Lectuers { get; set; } 
 
-        public int MaterialsId { get; set; } //link do dysku ze wszytkimi materiałami
-
-        public virtual Material Material { get; set; }
+       
+        public virtual List<Material> Materials { get; set; }
 
 
         public virtual List<Tutor> Turors { get; set; }

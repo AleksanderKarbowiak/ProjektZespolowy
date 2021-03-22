@@ -17,7 +17,8 @@ namespace SCW.Entities
 
         public string PhoneNumber { get; set; }
         public int UserId { get; set; }
-        public float GradeTutor { get; set; }
+        public virtual User User { get; set; }
+        //public float GradeTutor { get; set; } tez idze obliczyc 
         //ocena odzielnna tabela srednia
         public virtual List<OpinionTutor> Opinions { get; set; }
         public virtual List<Subject> Subjects { get; set; }

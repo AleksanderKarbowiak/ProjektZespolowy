@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace SCW.Models
-{
+{   
+    //wyswietane dane dla klienta
     public class SubjectDTO
     {
         public int Id { get; set; }

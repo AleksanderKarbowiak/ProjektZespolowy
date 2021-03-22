@@ -15,13 +15,12 @@ namespace SCW.Entities
         public string Degree { get; set; }
         public string Email { get; set; }
 
-        public float GradeLectuer { get; set; }
+       // public float GradeLectuer { get; set; } mozna obliczyc z tabeli opiniaProwadzacych
         public virtual List<OpinionLectuer> Opinions { get; set; }
         //ocena srednia z opini 
 
-
+        public virtual List<Subject> Subjects { get; set; }
 
         public virtual List<Faculty> Faculties { get; set; }
-        public virtual List<Subject> Subjects { get; set; }
     }
 }

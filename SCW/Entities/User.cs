@@ -11,7 +11,7 @@ namespace SCW.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string Login { get; set; }
-        public string Password { get; set; } //zaszyfrowane i hashe 
+        public string Password { get; set; } //zaszyfrowane i hashe trzeba bedzie zrobic ale to razem z logowaniem
         public string Email { get; set; }
 
         public int FacultyId { get; set; }
@@ -20,6 +20,8 @@ namespace SCW.Entities
         public bool IsTutor { get; set; }  
 
         public int TutorId { get; set; }
+
+       // public virtual Tutor Tutor { get; set; }
         //powiazanie 
     }
 }

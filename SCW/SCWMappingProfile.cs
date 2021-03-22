@@ -12,6 +12,7 @@ namespace SCW
     {
         public SCWMappingProfile()
         {
+            //mapowanie danych z bazy aby wyswietlic tylko potrzebne dane 
             CreateMap<FieldOfStudy, FieldsDTO>()
                 .ForMember(m => m.Faculty, s => s.MapFrom(c => c.Faculty.Name));
 

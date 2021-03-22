@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace SCW.Models
 {
+    //wyswietlane info dla klienta bez danych "wrazliwych"
     public class FieldsDTO
     {
         public int Id { get; set; }

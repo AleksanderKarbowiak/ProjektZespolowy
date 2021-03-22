@@ -3,16 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SCW.Entities
+namespace SCW.Models
 {
-    public class OpinionTutor
+    public class CreateFieldDTO
     {
         public int Id { get; set; }
-
-        public int TutorId { get; set; }
-        public virtual Tutor Tutor { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
 
-        public int Grade { get; set; }
+        public string Faculty { get; set; }
     }
 }

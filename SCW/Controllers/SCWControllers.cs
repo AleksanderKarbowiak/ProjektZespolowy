@@ -21,7 +21,9 @@ namespace SCW.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public ActionResult<IEnumerable<FieldsDTO>> GetAllField()
+        public ActionResult<IEnumerable<FieldsDTO>> GetAllField() //wyswietla w formacjie json wysztkie kierunki,
+                                                                  //w postmanie, na przegladarke trzeba sformatowac
+                                                                  //trzeba bedzie pewnie przeniesc akcje do odzielnej klasy 
         {
             var fields = _dbContext
                 .Fields
@@ -36,7 +38,7 @@ namespace SCW.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<IEnumerable<FieldsDTO>> GetField([FromRoute] int id)
+        public ActionResult<IEnumerable<FieldsDTO>> GetField([FromRoute] int id)//wyswietla dany kierunek, reszta jak wyzej
         {
             var fields = _dbContext
                 .Fields

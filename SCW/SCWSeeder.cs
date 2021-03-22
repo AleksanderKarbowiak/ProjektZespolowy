@@ -6,6 +6,7 @@ using SCW.Entities;
 
 namespace SCW
 {
+    //przykładowe dane do bazy 
     public class SCWSeeder
     {
         private readonly SCWDbContext _dbContext;
@@ -57,11 +58,14 @@ namespace SCW
                                             Email="andrzej_zembrzuski[at]sggw.edu.pl"
                                         }
                                     },
-                                    Material=new Material()
+                                    Materials=new List<Material>()
                                     {
-                                        Link="Tu link do dysku",
-                                        Name="Matma Dyskretna",
-                                        Description="MAteriały do matmy dyskretnej"
+                                        new Material()
+                                        {
+                                            Link="Tu link do dysku",
+                                            Name="Matma Dyskretna",
+                                            Description="MAteriały do matmy dyskretnej"
+                                        }
                                     }
 
                                 },
@@ -79,11 +83,14 @@ namespace SCW
                                             Email="maciej_pankiewicz [at] sggw.pl",
                                         }
                                     },
-                                     Material=new Material()
+                                     Materials=new List<Material>()
                                     {
-                                        Link="Tu link do dysku",
-                                        Name="Pod Programowania",
-                                        Description="MAteriały Programowania",
+                                        new Material()
+                                        {
+                                            Link="Tu link do dysku",
+                                            Name="Pod Programowania",
+                                            Description="MAteriały Programowania",
+                                        }
                                     }
                                 }
                             }
@@ -109,11 +116,14 @@ namespace SCW
                                             Email="wojciech_zielinski [at] sggw.pl",
                                         }
                                     },
-                                    Material=new Material()
+                                    Materials=new List<Material>()
                                     {
-                                        Link="Tu link do dysku",
-                                        Name="Rachunek",
-                                        Description="MAteriały do rachunku",
+                                        new Material()
+                                        {
+                                            Link="Tu link do dysku",
+                                            Name="Rachunek",
+                                            Description="MAteriały do rachunku",
+                                        }
                                     }
                                 }
 

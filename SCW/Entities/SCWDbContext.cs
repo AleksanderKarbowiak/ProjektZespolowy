@@ -45,6 +45,7 @@ namespace SCW.Entities
                 .Property(l => l.Surname)
                 .IsRequired()
                 .HasMaxLength(25);
+
             modelBuilder.Entity<Lectuer>()
                .Property(l => l.Degree)
                .IsRequired()

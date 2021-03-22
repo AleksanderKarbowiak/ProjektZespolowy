@@ -13,5 +13,6 @@ namespace SCW.Entities
         public string Description { get; set; }
 
         public int SubjectId { get; set; }
+        public virtual Subject Subject { get; set; }
     }
 }

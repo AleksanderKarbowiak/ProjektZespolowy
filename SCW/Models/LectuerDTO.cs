@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace SCW.Models
 {
+    //nie uzywany narazie model
     public class LectuerDTO
     {
         public int Id { get; set; }
