@@ -1,0 +1,79 @@
+﻿<html>
+<head>
+    <link href="~/css/SGGW_FORUM/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+
+    <nav>
+        <div class="logo">
+            <h4>Forum SGGW</h4>
+        </div>
+        <ul class="nav-links">
+            <li><a href="../mainstrona.html">Start</a></li>
+            <li><a href="profil.html">Profil</a></li>
+            <li><a href="../materialy.html">Materiały</a></li>
+            <li><a href="wykladowcy.html">Wykładowcy</a></li>
+            <li><a href="korepetytorzy.html">Korepetycje</a></li>
+            <li><a href="#">Wyloguj</a></li>
+        </ul>
+        <div class="burger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </nav>
+
+
+    <div id="strona" style="display:flex; justify-content: center; align-items: center;">
+
+        <form class="formularz" style="padding: 4rem; box-shadow: 0 0 20px 9px black;">
+            <h2 class="naglowek" style="text-align: center;">Twoje dane:</h2>
+            <input type="text" class="pole_tekstowe" placeholder="Imię" value="Piotr" required>
+            <input type="text" class="pole_tekstowe" placeholder="Nazwisko" value="Czak" required>
+            <input type="text" class="pole_tekstowe" placeholder="login" value="112,5plaska" required>
+            <input type="email" class="pole_tekstowe" placeholder="Adres e-mail" value="czak1234@gmail.com" required>
+            <input type="text" class="pole_tekstowe" placeholder="Numer Indeksu" required>
+
+            <select id="kierunek" name="kierunek">
+                <option value="informatyka">Informatyka</option>
+                <option value="inormatykaEkonometria">Informatyka i ekonometria</option>
+            </select>
+            <select id="stopien" name="stopien">
+                <option value="Inżynier">Inżynier</option>
+                <option value="magister">Magister</option>
+            </select>
+            <br>
+            <button style="margin-top: 3rem;" type="submit" class="przycisk_zaloguj">Edytuj</button>
+        </form>
+    </div>
+
+    <script>
+            function navSlide() {
+            const burger = document.querySelector(".burger");
+            const nav = document.querySelector(".nav-links");
+            const navLinks = document.querySelectorAll(".nav-links li");
+
+            burger.addEventListener("click", () => {
+            //Toggle Nav
+            nav.classList.toggle("nav-active");
+
+            //Animate Links
+            navLinks.forEach((link, index) => {
+                if (link.style.animation) {
+                    link.style.animation = ""
+                } else {
+                    link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.5}s`;
+                }
+            });
+            //Burger Animation
+            burger.classList.toggle("toggle");
+        });
+
+        }
+
+        navSlide();
+
+
+    </script>
+</body>
+</html>

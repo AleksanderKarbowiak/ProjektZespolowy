@@ -1,20 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Maciej\\Desktop\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj": {}
+    "C:\\Users\\skarbowiak\\Documents\\repoSCW\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Maciej\\Desktop\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj": {
+    "C:\\Users\\skarbowiak\\Documents\\repoSCW\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Maciej\\Desktop\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj",
+        "projectUniqueName": "C:\\Users\\skarbowiak\\Documents\\repoSCW\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj",
         "projectName": "SCW",
-        "projectPath": "C:\\Users\\Maciej\\Desktop\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj",
-        "packagesPath": "C:\\Users\\Maciej\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Maciej\\Desktop\\StudenckieCentrumWiedzy\\SCW\\obj\\",
+        "projectPath": "C:\\Users\\skarbowiak\\Documents\\repoSCW\\StudenckieCentrumWiedzy\\SCW\\SCW.csproj",
+        "packagesPath": "C:\\Users\\skarbowiak\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\skarbowiak\\Documents\\repoSCW\\StudenckieCentrumWiedzy\\SCW\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Maciej\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\skarbowiak\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
