@@ -4,6 +4,6 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>SCW</ActiveDebugProfile>
+    <ActiveDebugProfile>WSL 2</ActiveDebugProfile>
   </PropertyGroup>
 </Project>

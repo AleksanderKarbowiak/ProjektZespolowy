@@ -1,0 +1,58 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+.hero {
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)),url(sggw_kampus.jpg);
+    background-position: center;
+    background-size: cover;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-box {
+    width: 380px;
+    height: 380px;
+    background-color: white;
+    background: linear-gradient(rgba(255,255,255,0.3),rgba(255,255,255,0.3));
+    position: relative;
+}
+
+    .button-box button {
+        display: block;
+        width: 300px;
+        height: 80px; /*dodalem px*/
+        border-radius: 12px;
+    }
+
+.btn {
+    border: 3px solid;
+    background: none;
+    padding: 10px 20px;
+    font-size: 30px;
+    font-family: "montserrat";
+    cursor: pointer;
+    margin: 10px auto;
+    transition: 0.8s;
+    position: relative;
+    overflow: hidden;
+    color: #fff;
+}
+
+    .btn:hover {
+        color: #2ddb53;
+    }
+
+a {
+    color: #fff;
+}
+
+    a:hover {
+        color: #2ddb53;
+    }
