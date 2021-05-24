@@ -1,3 +1,12 @@
+<?php
+   session_start();
+if((isset($_SESSION['zalogowany']))&&($_SESSION['zalogowany']==true))
+{
+   header('Location: Strona\index.html');
+   exit();
+}
+?>
+
 <html>
     <head>
         <link href="SGGW_FORUM/style.css" rel="stylesheet" type="text/css">
@@ -15,20 +24,20 @@
                     <button type="button" class="switch" onclick="login()">LOGOWANIE</button>
                     <button type="button" class="switch" onclick="register()">REJESTRACJA</button>
                 </div>
-                <form id="logowanie" class="formularz">
-                    <input type="text" class="pole_tekstowe" placeholder="Login" required>
-                    <input type="password" class="pole_tekstowe" placeholder="Hasło" required>
+                <form action="logon.php" method="post" id="logowanie" class="formularz">
+                    <input type="text" class="pole_tekstowe" name="logonlogin" placeholder="Login" required>
+                    <input type="password" class="pole_tekstowe" name="logonpassword" placeholder="Hasło" required>
                     <button type="submit" class="przycisk_zaloguj">ZALOGUJ</button>
                     
                 </form>
                 
-                <form id="rejestracja" class="formularz">
-                    <input type="text" class="pole_tekstowe" placeholder="Imię" required>
-                    <input type="text" class="pole_tekstowe" placeholder="Nazwisko" required>
-                    <input type="text" class="pole_tekstowe" placeholder="login" required>
-                    <input type="email" class="pole_tekstowe" placeholder="Adres e-mail" required>
-                    <input type="password" class="pole_tekstowe" placeholder="Hasło" required>
-                    <input type="password" class="pole_tekstowe" placeholder="Powtórz hasło" required>
+                <form action="register.php" method="post" id="rejestracja" class="formularz">
+                    <input type="text" class="pole_tekstowe" name="regname" placeholder="Imię" required>
+                    <input type="text" class="pole_tekstowe" name="regsurname" placeholder="Nazwisko" required>
+                    <input type="text" class="pole_tekstowe" name="reglogin" placeholder="Login" required>
+                    <input type="email" class="pole_tekstowe" name="regmail" placeholder="Adres e-mail" required>
+                    <input type="password" class="pole_tekstowe" name="regpass" placeholder="Hasło" required>
+                    <input type="password" class="pole_tekstowe" name="regrepass" placeholder="Powtórz hasło" required>
                     <br>
                     <select id="kierunek" name="kierunek">
                         <option value="informatyka">Informatyka</option>
