@@ -1,4 +1,11 @@
-<!DOCTYPE html>
+<?php
+session_start();
+if (!isset($_SESSION['id_uzytkownika']))
+{
+    header("Location: index.php");
+    die();
+}
+?>
 <html lang="pl">
 <head>
     <meta charset="utf-8">
