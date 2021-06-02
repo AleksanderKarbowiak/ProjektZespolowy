@@ -47,8 +47,13 @@ $_PHP_SELF='wykladowcy.php';
                     <h1>DODAJ OPINIĘ</h1>
                     <hr>
 
-                    <form id="opinia">
+                    <form id="opinia" action="dodaj_opinie.php" method="post">
 
+                        <?php
+                            if($_POST["lecturer_id"]){
+                            echo'<input type="number" name="lecturer_id" value="'.$_POST["lecturer_id"].'" hidden/>';
+                            }
+                        ?>
                         <span class="Ocena">
                             <input id="demo-1" type="radio" name="demo" value="1"> 
                             <label for="demo-1">1 star</label>
@@ -69,7 +74,7 @@ $_PHP_SELF='wykladowcy.php';
                                 <label for="demo-5" aria-label="5 gwiazdek" title="5/5"></label>   
                             </div>
                         </span>
-                        <textarea rows="4" name="opinia" form="usrform" placeholder="Twoja opinia..." style="width:100%;"></textarea>
+                        <textarea rows="4" name="opinia" placeholder="Twoja opinia..." style="width:100%;"></textarea>
                         <br><br>
                         <button type="submit" class="kor_opinie_btn">WYŚLIJ</button>
 
@@ -112,8 +117,8 @@ $_PHP_SELF='wykladowcy.php';
             <li><a href="../mainstrona.html">Start</a></li>
             <li><a href="profil.html">Profil</a></li>
             <li><a href="materialy.php">Materiały</a></li>
-            <li><a href="wykladowcy.php">Wykładowcy</a></li>
-            <li><a href="korepetytorzy.html">Korepetycje</a></li>
+            <li><a href="#">Wykładowcy</a></li>
+            <li><a href="korepetytorzy.php">Korepetycje</a></li>
             <li><a href="#">Wyloguj</a></li>
         </ul>
         <div class="burger">
@@ -227,7 +232,7 @@ $_PHP_SELF='wykladowcy.php';
                                 $row = $opinion_stars->fetch_assoc();
                                 $sum+=$row['Stars'];
                             }
-                            return $sum/$opinion_count;
+                            return round($sum/$opinion_count,1);
                         }
 
 
