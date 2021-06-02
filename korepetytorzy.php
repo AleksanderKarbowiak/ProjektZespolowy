@@ -25,7 +25,13 @@ $_PHP_SELF='korepetytorzy.php';
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Forum wiedzy SGGW</title>
-        <link  rel="stylesheet" href="style_sggw_forum.css">
+        <link  rel="stylesheet" href="css/style_sggw_forum.css">
+        <script type="text/javascript">
+        function op_otworz(){
+            document.getElementById("opinie").style.visibility = "visible";
+            document.getElementById("opinie").style.opacity = "1";
+        }
+        </script>
     </head>
     <body>
         
@@ -37,26 +43,63 @@ $_PHP_SELF='korepetytorzy.php';
             </div>
             <div id="op_all">
                 <div id="op_content">
-
                     <div class="korepetytor">
-                        <h1>DANE</h1>
-                        <hr>
-                        <div class="kor_prof">
-                            <img src="images/profile/profile13.png">
-                        </div>
-                        <div class="kor_opis">
-                            <div class="kor_imie">ANDRZEJ
-                                <div class="kor_ocena">4.5/5</div>
+                        
+                    <?php
+                    
+                    function random_pic($gender)
+                    {
+                        $dir = 'images/profile/'.$gender;
+                        $files = glob($dir . '/*.*', GLOB_BRACE);
+                        return $files[array_rand($files)];
+                    }
+                    
+                    if($_POST["tutor_id"]) {
 
-                            </div>
-                            <div class="specjalnosc"><div class="icon"></div><div class="spec_content">Informatyka</div></div>
-                            <div class="kor_kontakt"><div class="icon"></div><div class="spec_content">sampleANDRZEJ@mail.com</div></div>
-                            <div class="cena">40-60zł/h</div>
-                            <hr>
-                            <div class="Kor_o_sobie">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            </div>
+                        //TUTOR QUERY
+                        //IdUser,Price,AboutMe
+                        $tutor_query = "select IdUser,Price,AboutMe from Tutor where Id=?";
+                        $stmt = $db->prepare($tutor_query); 
+                        $stmt->bind_param("i", $_POST["tutor_id"]);
+                        $stmt->execute();
+                        $tutor = $stmt->get_result();
+                        $tutor = $tutor->fetch_assoc();
+                        $userId = $tutor['IdUser'];
+                        
+                        //USER DATA QUERY
+                        //Name, Email,Gender
+                        $user_data_query = "select Name,Email,Gender from Users where Id=?";
+                        $stmt = $db->prepare($user_data_query); 
+                        $stmt->bind_param("i", $userId);
+                        $stmt->execute();
+                        $user_data = $stmt->get_result();
+                        $user_data = $user_data->fetch_assoc();
+                        
+                        $gender = $user_data['Gender'];
+                        
+                        if($gender == 'K')
+                        {
+                            $chosen_avatar = random_pic("Female");
+                        }
+                        else
+                        {
+                            $chosen_avatar = random_pic("Male");
+                        }
+                        
+                        echo'<h1>DANE</h1>';
+                        echo'<hr>';
+                        echo'<div class="kor_prof">
+                            <img src="'.$chosen_avatar.'">
+                        </div>';
+                        echo'<div class="kor_opis">';
+                        echo'<div class="kor_imie">'.$user_data['Name'].'</div>';
+                        echo'<div class="kor_kontakt"><div class="icon"></div><div class="spec_content">'.$user_data['Email'].'</div></div>';
+                        echo'<div class="cena">'.$tutor['Price'].' zł/h</div>';
+                        echo'<hr>';
+                        echo'<div class="Kor_o_sobie">'.$tutor['AboutMe'].'</div>';
+                        
+                    }
+                    ?>
                         </div>
                     </div>
                     <div class="op_dodaj">
@@ -64,7 +107,13 @@ $_PHP_SELF='korepetytorzy.php';
                         <h1>DODAJ OPINIĘ</h1>
                         <hr>
 
-                        <form id="opinia">
+                        <form id="opinia" action="dodaj_op_korepetytor.php" method="post">
+                            
+                            <?php
+                            if($_POST["tutor_id"]){
+                            echo'<input type="number" name="tutor_id" value="'.$_POST["tutor_id"].'" hidden/>';
+                            }
+                            ?>
 
                             <span class="Ocena">
                                 <input id="demo-1" type="radio" name="demo" value="1"> 
@@ -86,7 +135,7 @@ $_PHP_SELF='korepetytorzy.php';
                                     <label for="demo-5" aria-label="5 gwiazdek" title="5/5"></label>   
                                 </div>
                             </span>
-                            <textarea rows="4" name="opinia" form="usrform" placeholder="Twoja opinia..." style="width:100%;"></textarea>
+                            <textarea rows="4" name="opinia" placeholder="Twoja opinia..." style="width:100%;"></textarea>
                             <br><br><input type="text" name="imie"  required placeholder="Imię"><br>
                             <button type="submit" class="kor_opinie_btn">WYŚLIJ</button>
 
@@ -95,50 +144,28 @@ $_PHP_SELF='korepetytorzy.php';
                     <div id="opinie_innych">
                         <h1>OPINIE INNYCH</h1>
                         <hr>
-
-                        <div class="op_opinia">
-                            <div class="kor_ocena">4.5/5</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            <br><div class="op_podpis">Andrzej</div>
-                        </div>
-
-                        <div class="op_opinia">
-                            <div class="kor_ocena">4.5/5</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            <br><div class="op_podpis">Andrzej</div>
-                        </div>
-
-                        <div class="op_opinia">
-                            <div class="kor_ocena">4.5/5</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            <br><div class="op_podpis">Andrzej</div>
-                        </div>
-
-                        <div class="op_opinia">
-                            <div class="kor_ocena">4.5/5</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            <br><div class="op_podpis">Andrzej</div>
-                        </div>
-
-                        <div class="op_opinia">
-                            <div class="kor_ocena">4.5/5</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            <br><div class="op_podpis">Andrzej</div>
-                        </div>
-
-                        <div class="op_opinia">
-                            <div class="kor_ocena">4.5/5</div>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            <br><div class="op_podpis">Andrzej</div>
-                        </div>
-
-
+                        
+                        <?php 
+                    
+                        if($_POST["tutor_id"]) {
+                        $opinions__query = "select Description,Author,Stars from OpinionTutor where IDTutor=?";
+                        $stmt = $db->prepare($opinions__query); 
+                        $stmt->bind_param("i",$_POST["tutor_id"]);
+                        $stmt->execute();
+                        $opinions = $stmt->get_result();
+                        
+                        $opinions_count=$opinions->num_rows;
+                        for($k=0; $k<$opinions_count; $k++) {
+                            $opinion =$opinions->fetch_assoc();
+                            echo'<div class="op_opinia">';
+                            echo'<div class="kor_ocena">'.$opinion['Stars'].'/5</div>';
+                            echo $opinion['Description'];
+                            echo'<br><div class="op_podpis">'.$opinion['Author'].'</div>';
+                            echo'</div>';
+                        }
+                        echo '<script type="text/javascript">op_otworz();</script>';
+                        }
+                    ?>
                     </div>
 
                 </div>
@@ -264,13 +291,6 @@ $_PHP_SELF='korepetytorzy.php';
                 
                 <?php
 
-                    function random_pic($gender)
-                    {
-                        $dir = 'images/profile/'.$gender;
-                        $files = glob($dir . '/*.*', GLOB_BRACE);
-                        return $files[array_rand($files)];
-                    }
-
                     function calculate_avg_opinion($opinion_stars)
                     {
                         $sum=0;
@@ -354,12 +374,12 @@ $_PHP_SELF='korepetytorzy.php';
                             }
                         }
                         echo'</div></div>';
-                        echo'<div class="cena">'.$row['Price'].'zł/h</div>';
+                        echo'<div class="cena">'.$row['Price'].' zł/h</div>';
                         echo'<div class="kor_kontakt"><div class="icon"></div><div class="spec_content">'.$user_data['Email'].'</div></div>';
                         echo'<hr>';
                         echo'<div class="Kor_o_sobie">'.$row['AboutMe'].'</div>';
                         echo'<form action = "'.$_PHP_SELF.'" method = "POST">';
-                        echo'<input type="number" name="lecturer_id" value="'.$row['ID'].'" hidden/>';
+                        echo'<input type="number" name="tutor_id" value="'.$row['ID'].'" hidden/>';
                         echo'<button class="kor_opinie_btn">WIĘCEJ...</button>';
                         echo'</form>';
                         echo'</div>

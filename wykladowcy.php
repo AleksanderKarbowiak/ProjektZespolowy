@@ -25,7 +25,7 @@ $_PHP_SELF='wykladowcy.php';
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Forum wiedzy SGGW</title>
-    <link  rel="stylesheet" href="style_sggw_forum.css">
+    <link  rel="stylesheet" href="css/style_sggw_forum.css">
     <script type="text/javascript">
     function op_otworz(){
         document.getElementById("opinie").style.visibility = "visible";
@@ -47,7 +47,7 @@ $_PHP_SELF='wykladowcy.php';
                     <h1>DODAJ OPINIĘ</h1>
                     <hr>
 
-                    <form id="opinia" action="dodaj_opinie.php" method="post">
+                    <form id="opinia" action="dodaj_op_wykladowca.php" method="post">
 
                         <?php
                             if($_POST["lecturer_id"]){
@@ -117,7 +117,7 @@ $_PHP_SELF='wykladowcy.php';
             <li><a href="../mainstrona.html">Start</a></li>
             <li><a href="profil.html">Profil</a></li>
             <li><a href="materialy.php">Materiały</a></li>
-            <li><a href="#">Wykładowcy</a></li>
+            <li><a href="wykladowcy.php">Wykładowcy</a></li>
             <li><a href="korepetytorzy.php">Korepetycje</a></li>
             <li><a href="#">Wyloguj</a></li>
         </ul>
