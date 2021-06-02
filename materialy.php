@@ -43,9 +43,9 @@ if (!isset($_SESSION['id_uzytkownika']))
         <ul class="nav-links">
             <li><a href="mainstrona.html">Start</a></li>
             <li><a href="SGGW_FORUM/profil.html">Profil</a></li>
-            <li><a href="materialy.html">Materiały</a></li>
-            <li><a href="SGGW_FORUM/wykladowcy.html">Wykładowcy</a></li>
-            <li><a href="SGGW_FORUM/korepetytorzy.html">Korepetycje</a></li>
+            <li><a href="materialy.php">Materiały</a></li>
+            <li><a href="wykladowcy.php">Wykładowcy</a></li>
+            <li><a href="korepetytorzy.php">Korepetycje</a></li>
             <li><a href="#">Wyloguj</a></li>
         </ul>
         <div class="burger">
