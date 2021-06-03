@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Czas generowania: 26 Maj 2021, 15:17
+-- Czas generowania: 26 Maj 2021, 21:27
 -- Wersja serwera: 10.3.16-MariaDB
 -- Wersja PHP: 7.3.23
 
@@ -127,6 +127,40 @@ INSERT INTO `Materials` (`ID`, `Name`, `Plik`, `IDSubject`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Struktura tabeli dla tabeli `OpinionLecturers`
+--
+
+CREATE TABLE `OpinionLecturers` (
+  `ID` int(11) NOT NULL,
+  `IDLecturers` int(11) NOT NULL,
+  `Description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Stars` tinyint(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Zrzut danych tabeli `OpinionLecturers`
+--
+
+INSERT INTO `OpinionLecturers` (`ID`, `IDLecturers`, `Description`, `Stars`) VALUES
+(1, 2, 'testowa', 5),
+(2, 2, 'testowadwa', 10);
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `OpinionTutor`
+--
+
+CREATE TABLE `OpinionTutor` (
+  `ID` int(11) NOT NULL,
+  `IDTutor` int(11) NOT NULL,
+  `Description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Stars` tinyint(4) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Struktura tabeli dla tabeli `Subjects`
 --
 
@@ -209,13 +243,16 @@ ALTER TABLE `Faculties`
 -- Indeksy dla tabeli `Fields`
 --
 ALTER TABLE `Fields`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDFaculties` (`IDFaculties`);
 
 --
 -- Indeksy dla tabeli `FieldsSub`
 --
 ALTER TABLE `FieldsSub`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDFields` (`IDFields`),
+  ADD KEY `IDSubject` (`IDSubject`);
 
 --
 -- Indeksy dla tabeli `Lecturers`
@@ -227,25 +264,44 @@ ALTER TABLE `Lecturers`
 -- Indeksy dla tabeli `Materials`
 --
 ALTER TABLE `Materials`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDSubject` (`IDSubject`);
+
+--
+-- Indeksy dla tabeli `OpinionLecturers`
+--
+ALTER TABLE `OpinionLecturers`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDLecturers` (`IDLecturers`);
+
+--
+-- Indeksy dla tabeli `OpinionTutor`
+--
+ALTER TABLE `OpinionTutor`
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDTutor` (`IDTutor`);
 
 --
 -- Indeksy dla tabeli `Subjects`
 --
 ALTER TABLE `Subjects`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IDLecturers` (`IDLecturers`);
 
 --
 -- Indeksy dla tabeli `Tutor`
 --
 ALTER TABLE `Tutor`
-  ADD PRIMARY KEY (`ID`);
+  ADD PRIMARY KEY (`ID`),
+  ADD KEY `IdUser` (`IdUser`);
 
 --
 -- Indeksy dla tabeli `Users`
 --
 ALTER TABLE `Users`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`Id`),
+  ADD KEY `FieldId` (`FieldId`),
+  ADD KEY `IDTutor` (`IDTutor`);
 
 --
 -- AUTO_INCREMENT dla tabel zrzutów
@@ -282,6 +338,18 @@ ALTER TABLE `Materials`
   MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT dla tabeli `OpinionLecturers`
+--
+ALTER TABLE `OpinionLecturers`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT dla tabeli `OpinionTutor`
+--
+ALTER TABLE `OpinionTutor`
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT dla tabeli `Subjects`
 --
 ALTER TABLE `Subjects`
@@ -298,6 +366,60 @@ ALTER TABLE `Tutor`
 --
 ALTER TABLE `Users`
   MODIFY `Id` int(8) NOT NULL AUTO_INCREMENT COMMENT 'Id uzytkownika', AUTO_INCREMENT=11;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `Fields`
+--
+ALTER TABLE `Fields`
+  ADD CONSTRAINT `Fields_ibfk_1` FOREIGN KEY (`IDFaculties`) REFERENCES `Faculties` (`ID`);
+
+--
+-- Ograniczenia dla tabeli `FieldsSub`
+--
+ALTER TABLE `FieldsSub`
+  ADD CONSTRAINT `FieldsSub_ibfk_1` FOREIGN KEY (`IDFields`) REFERENCES `Fields` (`ID`),
+  ADD CONSTRAINT `FieldsSub_ibfk_2` FOREIGN KEY (`IDSubject`) REFERENCES `Subjects` (`ID`);
+
+--
+-- Ograniczenia dla tabeli `Materials`
+--
+ALTER TABLE `Materials`
+  ADD CONSTRAINT `Materials_ibfk_1` FOREIGN KEY (`IDSubject`) REFERENCES `Subjects` (`ID`);
+
+--
+-- Ograniczenia dla tabeli `OpinionLecturers`
+--
+ALTER TABLE `OpinionLecturers`
+  ADD CONSTRAINT `OpinionLecturers_ibfk_1` FOREIGN KEY (`IDLecturers`) REFERENCES `Lecturers` (`ID`);
+
+--
+-- Ograniczenia dla tabeli `OpinionTutor`
+--
+ALTER TABLE `OpinionTutor`
+  ADD CONSTRAINT `OpinionTutor_ibfk_1` FOREIGN KEY (`IDTutor`) REFERENCES `Tutor` (`ID`);
+
+--
+-- Ograniczenia dla tabeli `Subjects`
+--
+ALTER TABLE `Subjects`
+  ADD CONSTRAINT `Subjects_ibfk_1` FOREIGN KEY (`IDLecturers`) REFERENCES `Lecturers` (`ID`);
+
+--
+-- Ograniczenia dla tabeli `Tutor`
+--
+ALTER TABLE `Tutor`
+  ADD CONSTRAINT `Tutor_ibfk_1` FOREIGN KEY (`IdUser`) REFERENCES `Users` (`Id`);
+
+--
+-- Ograniczenia dla tabeli `Users`
+--
+ALTER TABLE `Users`
+  ADD CONSTRAINT `Users_ibfk_1` FOREIGN KEY (`FieldId`) REFERENCES `Fields` (`ID`),
+  ADD CONSTRAINT `Users_ibfk_2` FOREIGN KEY (`IDTutor`) REFERENCES `Tutor` (`ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
