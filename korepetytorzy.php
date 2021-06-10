@@ -178,9 +178,9 @@ $_PHP_SELF='korepetytorzy.php';
                 <h4>Forum SGGW</h4>
             </div>
             <ul class="nav-links">
-                <li><a href="../mainstrona.html">Start</a></li>
-                <li><a href="profil.html">Profil</a></li>
-                <li><a href="../materialy.php">Materiały</a></li>
+                <li><a href="mainstrona.html">Start</a></li>
+                <li><a href="SGGW_FORUM/profil.html">Profil</a></li>
+                <li><a href="materialy.php">Materiały</a></li>
                 <li><a href="wykladowcy.php">Wykładowcy</a></li>
                 <li><a href="korepetytorzy.php">Korepetycje</a></li>
                 <li><a href="#">Wyloguj</a></li>
