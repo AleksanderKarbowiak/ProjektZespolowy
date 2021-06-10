@@ -46,7 +46,7 @@ if (!isset($_SESSION['id_uzytkownika']))
             <li><a href="materialy.php">Materiały</a></li>
             <li><a href="wykladowcy.php">Wykładowcy</a></li>
             <li><a href="korepetytorzy.php">Korepetycje</a></li>
-            <li><a href="#">Wyloguj</a></li>
+            <li><a href="logout.php">Wyloguj</a></li>
         </ul>
         <div class="burger">
             <div class="line1"></div>
