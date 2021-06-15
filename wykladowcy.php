@@ -26,6 +26,8 @@ $_PHP_SELF='wykladowcy.php';
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Forum wiedzy SGGW</title>
     <link  rel="stylesheet" href="css/style_sggw_forum.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript">
     function op_otworz(){
         document.getElementById("opinie").style.visibility = "visible";
@@ -132,15 +134,24 @@ $_PHP_SELF='wykladowcy.php';
                 <div class="row">
                 <div class="col-md-4 col-lg-3 mx-3 mx-md-0 my-4 p-4 p-md-2" id="lewy">
                     <div class="naglowek">FILTRY</div>
-
                     <div class="filtry">
-                        <form>
+                        <?php
+                        $kier = [];
+                        $przedm =[];
+                        error_reporting (E_ALL ^ E_NOTICE);
+                        error_reporting(E_ERROR | E_PARSE); // coś skrzeczy ale działa
+                        ?>
+                        <form action="#" method="POST">
                             <hr>   
                             <h2>KIERUNEK</h2>
                             <div class="container-fluid">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-1">
-                                        <input type="checkbox" class="checkmarks" id="11" name="kierunek" value="Informatyka">
+                                    <input type="checkbox" class="checkmarks" id="11" name="kierunek[]" value="1" <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('1', $_POST['kierunek'])) echo 'checked="checked"';} 
+                                        ?>
+                                        >
                                     </div>
                                     <div class="col-10">
                                         <label for="11" class="lbl">Informatyka</label>
@@ -151,7 +162,11 @@ $_PHP_SELF='wykladowcy.php';
                             <div class="container-fluid">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-1">
-                                        <input type="checkbox" class="checkmarks" id="12" name="kierunek" value="Informatyka i ekonometria">
+                                        <input type="checkbox" class="checkmarks" id="12" name="kierunek[]" value="2"
+                                        <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('2', $_POST['kierunek'])) echo 'checked="checked"';} 
+                                        ?>>
                                     </div>
                                     <div class="col-10">
                                         <label for="12" class="lbl"> Informatyka i ekonometria</label><br>
@@ -164,10 +179,14 @@ $_PHP_SELF='wykladowcy.php';
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="1" name="przedmiot" value="Algebra Liniowa">
+                                            <input type="checkbox" class="checkmarks" id="1" name="przedmiot[]" value="1"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('1', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="1" class="lbl">Algebra liniowa</label>
+                                            <label for="1" class="lbl">Wstęp do programowania</label>
                                         </div>
                                     </div>
                                 </div>
@@ -175,7 +194,11 @@ $_PHP_SELF='wykladowcy.php';
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="2" name="przedmiot" value="Analiza matematyczna">
+                                            <input type="checkbox" class="checkmarks" id="2" name="przedmiot[]" value="2"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('2', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
                                             <label for="2" class="lbl"> Analiza matematyczna</label></br>
@@ -185,20 +208,56 @@ $_PHP_SELF='wykladowcy.php';
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="3" name="przedmiot" value="Programowanie obiektowe">
+                                            <input type="checkbox" class="checkmarks" id="3" name="przedmiot[]" value="3"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('3', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="3" class="lbl">Programowanie obiektowe</label></br>
+                                            <label for="3" class="lbl">Algebra liniowa</label></br>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot" value="Ekonomia">
+                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot[]" value="4"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('4', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="4" class="lbl">Ekonomia</label></br>
+                                            <label for="4" class="lbl">Filozofia</label></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot[]" value="5"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('5', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="5" class="lbl">Inżynieria oprogramowania</label></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="checkmarks" id="6" name="przedmiot[]" value="6"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('6', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="6" class="lbl">Data mining</label></br>
                                         </div>
                                     </div>
                                 </div>
@@ -208,7 +267,7 @@ $_PHP_SELF='wykladowcy.php';
                             <hr>
 
                             <br><br>
-                            <button type="submit" class="przycisk_zaloguj">FILTRUJ</button>
+                            <button type="submit" class="przycisk_zaloguj" name="zatw">FILTRUJ</button>
                         </form>
                     </div>
                 </div>
@@ -234,17 +293,50 @@ $_PHP_SELF='wykladowcy.php';
                             }
                             return round($sum/$opinion_count,1);
                         }
+                        
 
-
-                        $query = "select * from Lecturers";
+                        $query = "select Lecturers.Id, Lecturers.Name,Lecturers.Surname,Lecturers.Gender,Lecturers.Email,Lecturers.Degree,Lecturers.Description from Lecturers";
+                        if(isset($_POST['zatw'])){
+                            if(!empty($_POST['kierunek'])) {  
+                                foreach($_POST['kierunek'] as $value){
+                                    $kier[] = $value;
+                                }
+                            }
+                            if(!empty($_POST['przedmiot'])) {  
+                                foreach($_POST['przedmiot'] as $value){
+                                    $przedm[] = $value;
+                                }
+                            }
+                                $przedmiotstring = implode (", ", $przedm);
+                                $kierunekstring = implode (", ", $kier);
+                                if(empty($kierunekstring) and !empty($przedmiotstring)){
+                                    $query = "select DISTINCT Lecturers.Id, Lecturers.Name,Lecturers.Surname,Lecturers.Gender,Lecturers.Email,Lecturers.Degree,Lecturers.Description from Lecturers
+                                    left join OfferedSubjectsLecturers on Lecturers.Id = OfferedSubjectsLecturers.IDLecturer
+                                    left join FieldsSub on OfferedSubjectsLecturers.IDOfferedSub=FieldsSub.IDSubject
+                                    where FieldsSub.IDSubject in ($przedmiotstring)";
+                                }
+                                else if(empty($przedmiotstring) and !empty($kierunekstring)){
+                                    $query = "select DISTINCT Lecturers.Id, Lecturers.Name,Lecturers.Surname,Lecturers.Gender,Lecturers.Email,Lecturers.Degree,Lecturers.Description from Lecturers
+                                    left join OfferedSubjectsLecturers on Lecturers.Id = OfferedSubjectsLecturers.IDLecturer
+                                    left join FieldsSub on OfferedSubjectsLecturers.IDOfferedSub=FieldsSub.IDSubject
+                                    where FieldsSub.IDFields in ($kierunekstring)";
+                                }
+                                else if(empty($kierunekstring) and empty($przedmiotstring)){
+                                    $query = "select Lecturers.Id, Lecturers.Name,Lecturers.Surname,Lecturers.Gender,Lecturers.Email,Lecturers.Degree,Lecturers.Description from Lecturers";
+                                }
+                                else{
+                                $query = "select DISTINCT Lecturers.Id, Lecturers.Name,Lecturers.Surname,Lecturers.Gender,Lecturers.Email,Lecturers.Degree,Lecturers.Description from Lecturers
+                                left join OfferedSubjectsLecturers on Lecturers.Id = OfferedSubjectsLecturers.IDLecturer
+                                left join FieldsSub on OfferedSubjectsLecturers.IDOfferedSub=FieldsSub.IDSubject
+                                where FieldsSub.IDSubject in ($przedmiotstring) and FieldsSub.IDFields in ($kierunekstring)";
+                                }
+                        }
                         $result = $db->query($query);
                         $count = $result->num_rows;
-
                         for ($i=0; $i <$count; $i++)
                         {
                             $row = $result->fetch_assoc();                           
                             $gender = $row['Gender'];
-
                             if($gender == 'K')
                             {
                                 $chosen_avatar = random_pic("Female");
@@ -257,15 +349,18 @@ $_PHP_SELF='wykladowcy.php';
                             //STARS QUERY
                             $opinion_stars_query = "select Stars from OpinionLecturers where IDLecturers=?";
                             $stmt = $db->prepare($opinion_stars_query); 
-                            $stmt->bind_param("i", $row['ID']);
+                            $stmt->bind_param("i", $row['Id']);
                             $stmt->execute();
                             $opinion_stars = $stmt->get_result();
                             $avg_opinion_stars = calculate_avg_opinion($opinion_stars);
+                            
 
                             //SUBJECTS QUERY
-                            $subjects_names_query = "select Name from Subjects where IDLecturers=?";
+                            $subjects_names_query = "select OfferedSubjects.Name from OfferedSubjects
+                            left join OfferedSubjectsLecturers on OfferedSubjects.Id=OfferedSubjectsLecturers.IDOfferedSub
+                            where IDLecturer=?";
                             $stmt = $db->prepare($subjects_names_query); 
-                            $stmt->bind_param("i", $row['ID']);
+                            $stmt->bind_param("i", $row['Id']);
                             $stmt->execute();
                             $subjects_names = $stmt->get_result();
                             $subjects_count = $subjects_names->num_rows;
@@ -295,7 +390,7 @@ $_PHP_SELF='wykladowcy.php';
                             echo'<hr>';
                             echo'<div class="Kor_o_sobie">'.$row['Description'].'</div>';
                             echo'<form action = "'.$_PHP_SELF.'" method = "POST">';
-                            echo'<input type="number" name="lecturer_id" value="'.$row['ID'].'" hidden/>';
+                            echo'<input type="number" name="lecturer_id" value="'.$row['Id'].'" hidden/>';
                             echo'<button class="kor_opinie_btn">OPINIE</button>';
                             echo'</form>';
                             echo'</div>
