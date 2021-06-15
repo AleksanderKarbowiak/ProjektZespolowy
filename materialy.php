@@ -5,6 +5,17 @@ if (!isset($_SESSION['id_uzytkownika']))
     header("Location: index.php");
     die();
 }
+$_PHP_SELF='materialy.php';
+
+    function connect()
+    {  
+        $db = new mysqli('localhost', 'id16889000_basedeveloper', '123devPatrzy!','id16889000_scw_baza');  
+        if (! $db)
+            return false;
+        $db->autocommit(TRUE);
+        return $db;
+    }
+    $db = connect();
 ?>
 <html lang="pl">
 <head>
@@ -18,24 +29,7 @@ if (!isset($_SESSION['id_uzytkownika']))
 </head>
 <body>
     <script src="SGGW_FORUM/script.js"></script>
-    <!-- <div id="navbar_check" onmouseover="show_menu()"></div>
-    <div id="navtop">
-        
-        <nav id="navbar">
-            
-            <label class="logo">Forum SGGW</label>
-            <ul>
-            <li><a href="#">Strona Glowna</a></li>
-            <li><a href="#">Mój Profil</a></li>
-            <li><a class="aktywna" href="#">Materialy</a></li>
-            <li><a href="SGGW_FORUM/wykladowcy.html">Wykładowcy</a></li>
-            <li><a href="SGGW_FORUM/korepetytorzy.html">Korepetycje</a></li>
-            <li><a href="#">Wyloguj</a></li>
-             </ul>
     
-        </nav>
- 
-    </div> -->
     <nav>
         <div class="logo">
             <h4>Forum SGGW</h4>
@@ -61,13 +55,20 @@ if (!isset($_SESSION['id_uzytkownika']))
                     <div class="naglowek">FILTRY</div>
 
                     <div class="filtry">
-                        <form>
+                        <?php
+                        $kier = [];
+                        $przedm =[];
+                        error_reporting (E_ALL ^ E_NOTICE);
+                        error_reporting(E_ERROR | E_PARSE); // coś skrzeczy ale działa
+                        ?>
+                        <form action="#" method="POST">
+                            <!---
                             <hr>   
                             <h2>KIERUNEK</h2>
                             <div class="container-fluid">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-1">
-                                        <input type="checkbox" class="checkmarks" id="11" name="kierunek" value="Informatyka">
+                                    <input type="checkbox" class="checkmarks" id="11" name="kierunek[]" value="1" checked="checked" disabled="disabled">
                                     </div>
                                     <div class="col-10">
                                         <label for="11" class="lbl">Informatyka</label>
@@ -78,23 +79,28 @@ if (!isset($_SESSION['id_uzytkownika']))
                             <div class="container-fluid">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-1">
-                                        <input type="checkbox" class="checkmarks" id="12" name="kierunek" value="Informatyka i ekonometria">
+                                        <input type="checkbox" class="checkmarks" id="12" name="kierunek[]" value="2"
+                                        checked="checked" disabled="disabled">
                                     </div>
                                     <div class="col-10">
                                         <label for="12" class="lbl"> Informatyka i ekonometria</label><br>
                                     </div>
                                 </div>
                             </div>
-                            <hr>   
+                            <hr>   --->
                             <h2>PRZEDMIOT</h2>
                             <div class="wybor">
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="1" name="przedmiot" value="Algebra Liniowa">
+                                            <input type="checkbox" class="checkmarks" id="1" name="przedmiot[]" value="1"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('1', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="1" class="lbl">Algebra liniowa</label>
+                                            <label for="1" class="lbl">Wstęp do programowania</label>
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +108,11 @@ if (!isset($_SESSION['id_uzytkownika']))
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="2" name="przedmiot" value="Analiza matematyczna">
+                                            <input type="checkbox" class="checkmarks" id="2" name="przedmiot[]" value="2"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('2', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
                                             <label for="2" class="lbl"> Analiza matematyczna</label></br>
@@ -112,20 +122,56 @@ if (!isset($_SESSION['id_uzytkownika']))
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="3" name="przedmiot" value="Programowanie obiektowe">
+                                            <input type="checkbox" class="checkmarks" id="3" name="przedmiot[]" value="3"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('3', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="3" class="lbl">Programowanie obiektowe</label></br>
+                                            <label for="3" class="lbl">Algebra liniowa</label></br>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot" value="Ekonomia">
+                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot[]" value="4"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('4', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="4" class="lbl">Ekonomia</label></br>
+                                            <label for="4" class="lbl">Filozofia</label></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="checkmarks" id="5" name="przedmiot[]" value="5"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('5', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="5" class="lbl">Inżynieria oprogramowania</label></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="checkmarks" id="6" name="przedmiot[]" value="6"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('6', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="6" class="lbl">Data mining</label></br>
                                         </div>
                                     </div>
                                 </div>
@@ -135,77 +181,85 @@ if (!isset($_SESSION['id_uzytkownika']))
                             <hr>
 
                             <br><br>
-                            <button type="submit" class="przycisk_zaloguj">FILTRUJ</button>
+                            <button type="submit" class="przycisk_zaloguj" name="zatw">FILTRUJ</button>
                         </form>
                     </div>
                 </div>
                 <div class="col-md-7 col-lg-8 mt-4" id="prawy">
-                    <div class="korepetytor">
+                    <?php
+                    //ID, IdUser,Price,AboutMe
+                    $query = "select ID,Name,Plik,IDSubject,Description from Materials";
+                    if(isset($_POST['zatw'])){
+                            if(!empty($_POST['kierunek'])) {  
+                                foreach($_POST['kierunek'] as $value){
+                                    $kier[] = $value;
+                                }
+                            }
+                            if(!empty($_POST['przedmiot'])) {  
+                                foreach($_POST['przedmiot'] as $value){
+                                    $przedm[] = $value;
+                                }
+                            }
+                                $przedmiotstring = implode (", ", $przedm);
+                                $kierunekstring = implode (", ", $kier);
+                                if(empty($przedmiotstring)){
+                                    $query = "select ID,Name,Plik,IDSubject,Description from Materials";
+                                }
+                                else{
+                                    $query = "select Materials.ID,Materials.Name,Materials.Plik,Materials.IDSubject,Materials.Description from Materials
+                                    left join OfferedSubjects on Materials.IDSubject = OfferedSubjects.ID
+                                    where OfferedSubjects.ID in ($przedmiotstring)";
+                                } // git
+                        }
+                    $materials = $db->query($query);
+                    $materials_count = $materials->num_rows;
+
+                    for ($i=0; $i < $materials_count; $i++)
+                    {
+                        $row = $materials->fetch_assoc();
                         
-                        <div class="kor_opis_materialy">
-                            <div class="kor_imie">Analiza matematyczna</div>
-                            <div class="specjalnosc"><div class="icon"></div><div class="spec_content">Informatyka</div></div>
-                            <hr>
-                            <div class="Kor_o_sobie">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            </div>
-                            <button class="kor_opinie_btn" onClick="window.open('http://www.wp.pl');">Link</button>
-                        </div>
-                    </div>
-                    <div class="korepetytor">
+                        //SUBJECTS DATA QUERY
+                        //Name, Description
+                        $materials_data_query = "select Name,Description from Subjects where Id=?";
+                        $stmt = $db->prepare($materials_data_query); 
+                        $stmt->bind_param("i", $row['IDSubject']);
+                        $stmt->execute();
+                        $materials_data = $stmt->get_result();
+                        $materials_data = $materials_data->fetch_assoc();
+
+                        //FIELDS QUERY
+                        $fields_names_query = "SELECT Name
+                        FROM Fields INNER JOIN FieldsSub ON FieldsSub.IDFields=Fields.ID WHERE FieldsSub.IDSubject=?";
+                        $stmt = $db->prepare($fields_names_query); 
+                        $stmt->bind_param("i", $row['IDSubject']);
+                        $stmt->execute();
+                        $fields_names = $stmt->get_result();
+                        $fields_count = $fields_names->num_rows;
                         
-                        <div class="kor_opis_materialy">
-                            <div class="kor_imie">Obliczenia w chmurze</div>
-                            <div class="specjalnosc"><div class="icon"></div><div class="spec_content">Informatyka</div></div>
-                            <hr>
-                            <div class="Kor_o_sobie">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            </div>
-                            <button class="kor_opinie_btn" onClick="window.open('http://www.wp.pl');">Link</button>
-                        </div>
-                    </div>
-                    <div class="korepetytor">
-                        
-                        <div class="kor_opis_materialy">
-                            <div class="kor_imie">Paradygmaty Programowania</div>
-                            <div class="specjalnosc"><div class="icon"></div><div class="spec_content">Informatyka</div></div>
-                            <hr>
-                            <div class="Kor_o_sobie">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            </div>
-                            <button class="kor_opinie_btn" onClick="window.open('http://www.wp.pl');">Link</button>
-                        </div>
-                    </div>
-                    <div class="korepetytor">
-                        
-                        <div class="kor_opis_materialy">
-                            <div class="kor_imie">Programowanie wielowątkowe</div>
-                            <div class="specjalnosc"><div class="icon"></div><div class="spec_content">Informatyka i ekonometria</div></div>
-                            <hr>
-                            <div class="Kor_o_sobie">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            </div>
-                            <button class="kor_opinie_btn" onClick="window.open('http://www.wp.pl');">Link</button>
-                        </div>
-                    </div>
-                    <div class="korepetytor">
-                        
-                        <div class="kor_opis_materialy">
-                            <div class="kor_imie">Programowanie wielowątkowe</div>
-                            <div class="specjalnosc"><div class="icon"></div><div class="spec_content">Informatyka</div></div>
-                            <hr>
-                            <div class="Kor_o_sobie">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat in mauris sed pharetra. Curabitur semper eleifend sollicitudin. Suspendisse ac ex ipsum. 
-                            </div>
-                            <button class="kor_opinie_btn" onClick="window.open('http://www.wp.pl');">Link</button>
-                        </div>
-                    </div>
-                    
+                        echo'<div class="korepetytor">';
+                        echo'<div class="kor_opis_materialy">';
+                        echo'<div class="kor_imie">'.$materials_data["Name"];
+                        echo'</div>';
+                        echo'<div class="kor_kontakt"><div class="icon"></div><div class="spec_content">'.$row['Name'].'</div></div>';
+                        echo'<div class="specjalnosc"><div class="icon"></div><div class="spec_content">';
+                        for($j=0; $j<$fields_count; $j++)
+                        {
+                            $fields = $fields_names->fetch_assoc();
+                            echo $fields['Name'];
+                            if($j!=$fields_count-1)
+                            {
+                                echo', ';
+                            }
+                        }
+                        echo'</div></div><hr>';
+                        echo'<div class="Kor_o_sobie">'.$row['Description'];
+                        echo'</div>';
+                        $xyz="'";
+                        echo'<button class="kor_opinie_btn" onClick="window.open('.$xyz.$row['Plik'].$xyz.');">Link</button>';
+                        echo '</div>
+                        </div>';           
+                    }
+                ?>
                 </div>
                 </div>
             
