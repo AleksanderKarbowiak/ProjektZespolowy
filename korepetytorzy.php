@@ -199,17 +199,26 @@ $_PHP_SELF='korepetytorzy.php';
                     <div class="naglowek">FILTRY</div>
 
                     <div class="filtry">
-
-                        <form>
+                        <?php
+                        $kier = [];
+                        $przedm =[];
+                        error_reporting (E_ALL ^ E_NOTICE);
+                        error_reporting(E_ERROR | E_PARSE); // coś skrzeczy ale działa
+                        ?>
+                        <form action="#" method="POST">
                             <hr>   
                             <h2>KIERUNEK</h2>
                             <div class="container-fluid">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-1">
-                                        <input type="checkbox" class="checkmarks" id="1" name="kierunek" value="Informatyka">
+                                    <input type="checkbox" class="checkmarks" id="11" name="kierunek[]" value="1" <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('1', $_POST['kierunek'])) echo 'checked="checked"';} 
+                                        ?>
+                                        >
                                     </div>
                                     <div class="col-10">
-                                        <label for="1" class="lbl">Informatyka</label>
+                                        <label for="11" class="lbl">Informatyka</label>
                                     </div>
                                 </div>
                             </div>
@@ -217,10 +226,14 @@ $_PHP_SELF='korepetytorzy.php';
                             <div class="container-fluid">
                                 <div class="row justify-content-center align-items-center">
                                     <div class="col-1">
-                                        <input type="checkbox" class="checkmarks" id="2" name="kierunek" value="Informatyka i ekonometria">
+                                        <input type="checkbox" class="checkmarks" id="12" name="kierunek[]" value="2"
+                                        <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('2', $_POST['kierunek'])) echo 'checked="checked"';} 
+                                        ?>>
                                     </div>
                                     <div class="col-10">
-                                        <label for="2" class="lbl"> Informatyka i ekonometria</label><br>
+                                        <label for="12" class="lbl"> Informatyka i ekonometria</label><br>
                                     </div>
                                 </div>
                             </div>
@@ -230,17 +243,26 @@ $_PHP_SELF='korepetytorzy.php';
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="3" name="przedmiot" value="Algebra Liniowa">
+                                            <input type="checkbox" class="checkmarks" id="1" name="przedmiot[]" value="1"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('1', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="3" class="lbl">Algebra liniowa</label>
+                                            <label for="1" class="lbl">Wstęp do programowania</label>
                                         </div>
                                     </div>
                                 </div>
+                                
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="2" name="przedmiot" value="Analiza matematyczna">
+                                            <input type="checkbox" class="checkmarks" id="2" name="przedmiot[]" value="2"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('2', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
                                             <label for="2" class="lbl"> Analiza matematyczna</label></br>
@@ -250,23 +272,61 @@ $_PHP_SELF='korepetytorzy.php';
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="1" name="przedmiot" value="Programowanie obiektowe">
+                                            <input type="checkbox" class="checkmarks" id="3" name="przedmiot[]" value="3"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('3', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="1" class="lbl">Programowanie obiektowe</label></br>
+                                            <label for="3" class="lbl">Algebra liniowa</label></br>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="container-fluid">
                                     <div class="row justify-content-center align-items-center">
                                         <div class="col-1">
-                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot" value="Ekonomia">
+                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot[]" value="4"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('4', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
                                         </div>
                                         <div class="col-10">
-                                            <label for="4" class="lbl">Ekonomia</label></br>
+                                            <label for="4" class="lbl">Filozofia</label></br>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="container-fluid">
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="checkmarks" id="4" name="przedmiot[]" value="5"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('5', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="5" class="lbl">Inżynieria oprogramowania</label></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid">
+                                    <div class="row justify-content-center align-items-center">
+                                        <div class="col-1">
+                                            <input type="checkbox" class="checkmarks" id="6" name="przedmiot[]" value="6"
+                                            <?php if(isset($_POST['zatw']))
+                                        {
+                                        if (in_array('6', $_POST['przedmiot'])) echo 'checked="checked"';} 
+                                        ?>>
+                                        </div>
+                                        <div class="col-10">
+                                            <label for="6" class="lbl">Data mining</label></br>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
                             </div>      
                             <hr>
                             <div class="container-fluid">
@@ -274,12 +334,12 @@ $_PHP_SELF='korepetytorzy.php';
                                     <div class="col-10">
                                         <h2>CENA</h2>
                                     <span class="cena_center">
-                                        <input class="in_cena" type="text" id="od" placeholder="od"> - 
-                                        <input class="in_cena" type="text" id="do" placeholder="do">
+                                        <input class="in_cena" type="text" id="od" placeholder="od" name="od"> - 
+                                        <input class="in_cena" type="text" id="do" placeholder="do" name="do">
                                     </span>
                                     </div>
                                     
-                                        <button type="submit" class="przycisk_zaloguj">FILTRUJ</button>
+                                        <button type="submit" class="przycisk_zaloguj" name="zatw">FILTRUJ</button>
                                     
                                 </div>
                             </div>    
@@ -305,7 +365,49 @@ $_PHP_SELF='korepetytorzy.php';
                     }
 
                     //ID, IdUser,Price,AboutMe
-                    $query = "select * from Tutor";
+                    $query = "select Tutor.ID, Tutor.IdUser, Tutor.Price, Tutor.AboutMe from Tutor";
+                     if(isset($_POST['zatw'])){
+                            if(!empty($_POST['kierunek'])) {  
+                                foreach($_POST['kierunek'] as $value){
+                                    $kier[] = $value;
+                                }
+                            }
+                            if(!empty($_POST['przedmiot'])) {  
+                                foreach($_POST['przedmiot'] as $value){
+                                    $przedm[] = $value;
+                                }
+                            }
+                                $od = $_POST['od'];
+                                $do = $_POST['do'];
+                                if(!is_numeric($od)){$od=0;}
+                                if(!is_numeric($do)){$do=9999;}
+                                $przedmiotstring = implode (", ", $przedm);
+                                $kierunekstring = implode (", ", $kier);
+                                if(empty($kierunekstring) and !empty($przedmiotstring)){
+                                    $query = "select DISTINCT Tutor.ID, Tutor.IdUser, Tutor.Price, Tutor.AboutMe from Tutor
+                                        left join OfferedSubjectsTutors on Tutor.Id = OfferedSubjectsTutors.IDTutor
+                                        left join Users on Tutor.IdUser=Users.Id
+                                        where OfferedSubjectsTutors.IDOfferedSub in ($przedmiotstring) and Tutor.Price BETWEEN $od and $do";
+                                }
+                                else if(empty($przedmiotstring) and !empty($kierunekstring)){
+                                    $query = "select DISTINCT Tutor.ID, Tutor.IdUser, Tutor.Price, Tutor.AboutMe from Tutor
+                                        left join OfferedSubjectsTutors on Tutor.Id = OfferedSubjectsTutors.IDTutor
+                                        left join Users on Tutor.IdUser=Users.Id
+                                        where Users.FieldId in ($kierunekstring) and Tutor.Price BETWEEN $od and $do";
+                                }
+                                else if(empty($kierunekstring) and empty($przedmiotstring)){
+                                    $query = "select DISTINCT Tutor.ID, Tutor.IdUser, Tutor.Price, Tutor.AboutMe from Tutor
+                                        left join OfferedSubjectsTutors on Tutor.Id = OfferedSubjectsTutors.IDTutor
+                                        left join Users on Tutor.IdUser=Users.Id
+                                        where Tutor.Price BETWEEN $od and $do";
+                                }
+                                else{
+                                $query = "select DISTINCT Tutor.ID, Tutor.IdUser, Tutor.Price, Tutor.AboutMe from Tutor
+                                        left join OfferedSubjectsTutors on Tutor.Id = OfferedSubjectsTutors.IDTutor
+                                        left join Users on Tutor.IdUser=Users.Id
+                                        where OfferedSubjectsTutors.IDOfferedSub in ($przedmiotstring) and Users.FieldId in ($kierunekstring) and Tutor.Price BETWEEN $od and $do";
+                                }
+                        }
                     $tutors = $db->query($query);
                     $tutors_count = $tutors->num_rows;
 
